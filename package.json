@@ -1,0 +1,25 @@
+{
+  "name": "trim-apng",
+  "version": "1.0.0",
+  "description": "trim apng",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellozhangran/trim-apng.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hellozhangran/trim-apng/issues"
+  },
+  "homepage": "https://github.com/hellozhangran/trim-apng#readme",
+  "dependencies": {
+    "apng-assembler": "^1.0.2",
+    "fs-extra": "^7.0.0",
+    "glob": "^7.1.2",
+    "trim-image": "^1.0.3"
+  }
+}
