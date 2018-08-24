@@ -95,7 +95,6 @@ module.exports = function(input, output, cb) {
                     function(outputDir) {
                         fse.emptyDirSync(trimDir)
                         cb(max_config)
-                        console.log(`${outputDir} has been assembled successfully.`);
                     },
                     function(error) {
                         cb('error')
