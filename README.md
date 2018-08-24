@@ -7,11 +7,12 @@
 
 ## 使用 Usage
 
-```
+```javascript
+
 let trimAPNG = require('trim-apng');
 trimAPNG(input, output, function(config){
-
-
+    console.log(config)
 })
+
 ```
 
