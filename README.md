@@ -16,3 +16,10 @@ trimAPNG(input, output, function(config){
 
 ```
 
+## 参考
+> trim-image: https://github.com/renanvaz/trim-image
+
+> APNG那些事：https://aotu.io/notes/2016/11/07/apng/index.html
+
+> PNG文件格式详解：https://blog.mythsman.com/2015/12/08/1/
+
