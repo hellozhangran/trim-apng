@@ -7,5 +7,6 @@
  */
 
 let trimAPNG = require('./src/trim-apng')
-
+let delay = require('./src/delay')
 module.exports = trimAPNG
+module.exports.delay = delay

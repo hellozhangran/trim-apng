@@ -16,6 +16,21 @@ trimAPNG(input, output, function(config){
 
 ```
 
+可设置firstDelay的用法如下。（警告： 该用法需要本地提前安装好apngasm，macos下安装：brew install apngasm）
+
+```javascript
+let trimDelay = require('trim-apng').delay;
+
+// 设置第一帧delay为2秒，其余帧delay都是0.2秒
+trimDelay(input, output, {
+    firstDelay: 2000,
+    default: 200
+}, function(config){
+    console.log(config)
+})
+
+```
+
 ## 参考
 > * trim-image: https://github.com/renanvaz/trim-image
 > * APNG那些事：https://aotu.io/notes/2016/11/07/apng/index.html

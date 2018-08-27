@@ -3,7 +3,7 @@ const path = require('path');
 const glob = require('glob')
 const apngdis = require('./apngdis')
 const trimImage = require('./trim-image')
-const Assembler = require('apng-assembler');
+const apngasmDelay = require('./apngasm-delay')
 
 const pngsDir = path.resolve(__dirname, '../pngs');
 const trimDir = path.resolve(__dirname, '../trims');
@@ -47,7 +47,7 @@ function maxConfig(configs) {
 }
 
 
-module.exports = function(input, output, cb) {
+module.exports = function(input, output, delayOpts, cb) {
     if(!input || !output) {
         throw Error('参数错误 ~')
     }
@@ -57,7 +57,9 @@ module.exports = function(input, output, cb) {
     }
 
     let inputFile = input,
-        outputFile = output;
+        outputFile = output,
+        firstDelay = delayOpts.firstDelay,
+        defaultDelay = delayOpts.default;
 
     // 先把apng图片分解为n张png
     apngdis(inputFile)
@@ -84,26 +86,14 @@ module.exports = function(input, output, cb) {
             // 到这里，trims里已经存在了所有最终trim后的pngs
             fse.emptyDirSync(pngsDir)
             setTimeout(() => {
-                Assembler.assemble(
-                    path.resolve(trimDir, './_temp_png*.png'),
-                    outputFile,
-                    {
-                        loopCount: 0,
-                        frameDelay: 500,
-                        compression: Assembler.COMPRESS_7ZIP
-                    }
-                ).then(
-                    function(outputDir) {
-                        fse.emptyDirSync(trimDir)
-                        cb(max_config)
-                    },
-                    function(error) {
-                        cb('error')
-                        console.error(`Failed to assemble: ${error.message}`);
-                        console.error(`stdout: ${error.stdout}`);
-                        console.error(`stderr: ${error.stderr}`);
-                    }
-                );
+
+                let files = glob(path.resolve(trimDir, './_temp_png*.png'), {sync: true})
+                apngasmDelay(files, outputFile, {
+                    firstDelay: firstDelay,
+                    default: defaultDelay
+                })
+                fse.emptyDirSync(trimDir)
+                cb(max_config)
             }, 100)
         })
     })
